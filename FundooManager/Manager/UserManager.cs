@@ -26,5 +26,17 @@ namespace FundooManager.Manager
                 throw new Exception(e.Message);
             }
         }
+
+        public string LogIn(LoginModel login)
+        {
+            try
+            {
+                return this.repository.LogIn(login);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
