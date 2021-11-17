@@ -24,6 +24,8 @@ namespace Fundoo_Notes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddDbContextPool<UserContext>(option => option.UseSqlServer(this.Configuration.GetConnectionString("FundooDB")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
