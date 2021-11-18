@@ -31,16 +31,16 @@ namespace FundooRepository.Repository
                         // Encrypting the password
                         //userData.Password = this.EncryptPassword(userData.Password);
                         // Add the data to the database
-                        this.userContext.Add(userData);
+                        this.userContext.Users.Add(userData);
                         // Save the change in database
                         this.userContext.SaveChanges();
-                        return "Registration Successful";
+                        return "Registration Successfull";
                     }
-                    return "Registration UnSuccessful";
+                    return "Registration UnSuccessfull";
                 }
                 return "Email Id Already Exists";
             }
-            catch (ArgumentNullException ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -54,14 +54,14 @@ namespace FundooRepository.Repository
                 var validPassword = this.userContext.Users.Where(x => x.Password == logIn.Password).FirstOrDefault();
                 if (validEmail == null && validPassword == null)
                 {
-                    return "Login UnSuccessful";
+                    return "Login UnSuccessfull";
                 }
                 else
                 {
-                    return "Login Successful ";
+                    return "Login Successfull ";
                 }
             }
-            catch (ArgumentNullException ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

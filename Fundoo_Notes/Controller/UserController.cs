@@ -52,7 +52,7 @@ namespace Fundoo_Notes.Controller
             {
                 string result = this.manager.LogIn(login);
 
-                if (result.Equals("Login Successful "))
+                if (result.Equals("Login Successfull "))
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = result });
                 }
