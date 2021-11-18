@@ -39,10 +39,10 @@ namespace Fundoo_Notes.Controller
             }
         }
 
-        private IActionResult Ok<T>(ResponseModel<T> responseModel)
-        {
-            throw new NotImplementedException();
-        }
+        //private IActionResult Ok<T>(ResponseModel<T> responseModel)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         [HttpPost]
         [Route("api/Login")]
