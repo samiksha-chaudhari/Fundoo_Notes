@@ -5,9 +5,11 @@ using System.Text;
 
 namespace FundooModel
 {
-    public class RegisterModel
+    public class RegisterModel //register model class
     {
-        [Required]
+        //using get set property 
+
+        [Required] //indicate property must have value
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }

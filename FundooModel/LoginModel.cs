@@ -5,9 +5,10 @@ using System.Text;
 
 namespace FundooModel
 {
-    public class LoginModel
+    public class LoginModel //LoginModel class
     {
-        [Required]
+        //using get set property
+        [Required]//indicate property must have value
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
