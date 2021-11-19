@@ -17,19 +17,25 @@ namespace FundooRepository.Repository
             this.userContext = userContext;
         }
 
-        public static string EncryptPassword(string password)
+        //public string EncryptPassword(string password)
+        //{
+        //    try
+        //    {
+        //        byte[] EncryptPaas = new byte[password.Length];
+        //        EncryptPaas = System.Text.Encoding.UTF8.GetBytes(password);
+        //        string EncodedData = Convert.ToBase64String(EncryptPaas);
+        //        return EncodedData;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+
+        public string EncryptPassword(string password)
         {
-            try
-            {
-                byte[] EncryptPaas = new byte[password.Length];
-                EncryptPaas = System.Text.Encoding.UTF8.GetBytes(password);
-                string EncodedData = Convert.ToBase64String(EncryptPaas);
-                return EncodedData;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            return Convert.ToBase64String(passwordBytes);
         }
 
         public IConfiguration Configuration { get; }
@@ -80,6 +86,27 @@ namespace FundooRepository.Repository
                 throw new Exception(ex.Message);
             }
 
+        }
+
+        public string ResetPassword(ResetPasswordModel userData)
+        {
+            try
+            {
+                var validEmail = this.userContext.Users.Where(x => x.Email == userData.Email).FirstOrDefault();
+                if (userData != null)
+                {
+                    validEmail.Password = EncryptPassword(userData.NewPassword);
+                    this.userContext.Update(validEmail);
+                    this.userContext.SaveChanges();
+                    return "Password Updated";
+                }
+
+                return "Not Updated";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
     }
