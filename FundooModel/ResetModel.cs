@@ -5,9 +5,17 @@ using System.Text;
 
 namespace FundooModel
 {
-    public class ResetModel
+    public class ResetModel //Reset model class
     {
-        [Required]
+        //using get set property
+        [Required] //indicate property must have value
         public string Email { get; set; }
+
+        [Required]
+        public string NewPassword { get; set; }
+        
+        [Required]
+        public string ConfirmPassword { get; set; }
+
     }
 }

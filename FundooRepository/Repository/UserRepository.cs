@@ -17,6 +17,20 @@ namespace FundooRepository.Repository
             this.userContext = userContext;
         }
 
+        public static string EncryptPassword(string password)
+        {
+            try
+            {
+                byte[] EncryptPaas = new byte[password.Length];
+                EncryptPaas = System.Text.Encoding.UTF8.GetBytes(password);
+                string EncodedData = Convert.ToBase64String(EncryptPaas);
+                return EncodedData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public IConfiguration Configuration { get; }
         public string Register(RegisterModel userData)
@@ -29,7 +43,7 @@ namespace FundooRepository.Repository
                     if (userData != null)
                     {
                         // Encrypting the password
-                        //userData.Password = this.EncryptPassword(userData.Password);
+                        userData.Password = EncryptPassword(userData.Password);
                         // Add the data to the database
                         this.userContext.Users.Add(userData);
                         // Save the change in database
