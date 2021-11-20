@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 
 namespace FundooRepository.Repository
@@ -109,5 +110,28 @@ namespace FundooRepository.Repository
             }
         }
 
+        public string ForgotPassword(string email)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.From = new MailAddress("spchaudhari80@gmail.com");
+                mail.To.Add(email);
+                mail.Subject = "To Test Out Mail";
+                mail.Body = "This is for testing SMTP mail from GMAIL";
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("spchaudhari80@gmail.com", "*******");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+                return "Mail is send";
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

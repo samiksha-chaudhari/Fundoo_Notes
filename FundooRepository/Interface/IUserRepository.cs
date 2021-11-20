@@ -10,6 +10,7 @@ namespace FundooRepository.Repository
         string Register(RegisterModel userData);
         string LogIn(LoginModel login);
         string ResetPassword(ResetPasswordModel userData);//it is true if password updated
+        string ForgotPassword(string email);
 
     }
 }
