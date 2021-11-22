@@ -1,5 +1,6 @@
 ﻿using FundooModel;
 using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace FundooRepository.Repository
 {
@@ -10,7 +11,7 @@ namespace FundooRepository.Repository
         string Register(RegisterModel userData);
         string LogIn(LoginModel login);
         string ResetPassword(ResetPasswordModel userData);//it is true if password updated
-        string ForgotPassword(string email);
+        Task<string> ForgotPassword(string email);
 
     }
 }
