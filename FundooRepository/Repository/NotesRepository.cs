@@ -27,7 +27,7 @@ namespace FundooRepository.Repository
                 {
                     this.userContext.Notes.Add(noteData);
                     this.userContext.SaveChanges();
-                    return "Notes Addedd Successfully";
+                    return "Add Successfull";
                 }
 
                 return "Unsuccessfull";
