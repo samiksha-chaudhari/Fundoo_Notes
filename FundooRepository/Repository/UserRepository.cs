@@ -1,4 +1,5 @@
-﻿using FundooModel;
+﻿using Experimental.System.Messaging;
+using FundooModel;
 using FundooRepository.Context;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FundooRepository.Repository
 {
@@ -110,19 +112,20 @@ namespace FundooRepository.Repository
             }
         }
 
-        public string ForgotPassword(string email)
+        public async Task<string> ForgotPassword(string email)
         {
             try
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("spchaudhari80@gmail.com");
+                mail.From = new MailAddress(this.Configuration["Credentials: Email"]);
                 mail.To.Add(email);
                 mail.Subject = "To Test Out Mail";
-                mail.Body = "This is for testing SMTP mail from GMAIL";
+                SendMSMQ();
+                mail.Body = ReceiveMSMQ();
 
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("spchaudhari80@gmail.com", "*******");
+                SmtpServer.Credentials = new System.Net.NetworkCredential(this.Configuration["Credentials: Email"], this.Configuration["Credentials: Password"]);
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
                 return "Mail is send";
@@ -132,6 +135,28 @@ namespace FundooRepository.Repository
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public void SendMSMQ()
+        {
+            MessageQueue messageQueue;
+            if (MessageQueue.Exists(@".\Private$\Fundoo"))
+            {
+                messageQueue = new MessageQueue(@".\Private$\Fundoo");
+            }
+            else
+            {
+                messageQueue = MessageQueue.Create(@".\Private$\Fundoo");
+            }
+            string body = "This is for Testing SMTP mail from GMAIL";
+            messageQueue.Label = "Mail Body";
+            messageQueue.Send(body);
+        }
+        public string ReceiveMSMQ()
+        {
+            MessageQueue messageQueue = new MessageQueue(@".\Private$\Fundoo");
+            var receivemsg = messageQueue.Receive();
+            return receivemsg.ToString();
         }
     }
 }
