@@ -62,7 +62,7 @@ namespace Fundoo_Notes.Controller
         }
 
         [HttpPut]
-        [Route("api/updateNote")]
+        [Route("api/updatenote")]
         public IActionResult UpdateNote(NotesModel noteData)
         {
             try
@@ -83,8 +83,8 @@ namespace Fundoo_Notes.Controller
             }
         }
         [HttpPut]
-        [Route("api/changePin")]
-        public IActionResult ChangePin(int noteId)
+        [Route("api/pin")]
+        public IActionResult Pin(int noteId)
         {
             try
             {
@@ -96,6 +96,28 @@ namespace Fundoo_Notes.Controller
                 else
                 {
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note not Found" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        [HttpPut]
+        [Route("api/colour")]
+        public IActionResult Colour(int noteId, string noteColor)
+        {
+            try
+            {
+                string result = this.manager.Colour(noteId, noteColor);
+                if (result.Equals("Colour Changed"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = result });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = result });
                 }
             }
             catch (Exception ex)
