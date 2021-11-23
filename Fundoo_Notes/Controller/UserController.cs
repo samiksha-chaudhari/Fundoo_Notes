@@ -22,7 +22,7 @@ namespace Fundoo_Notes.Controller
         {
             try
             {
-                string result = await this.manager.Register(userData);
+                string result = await this.manager.Register(userData); 
 
                 if (result.Equals("Registration Successfull"))
                 {

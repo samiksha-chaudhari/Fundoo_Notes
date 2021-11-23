@@ -38,5 +38,24 @@ namespace FundooRepository.Repository
             }
         }
 
+        public string DeleteNote(int noteId)
+        {
+            try
+            {
+                var findNote = this.userContext.Notes.Find(noteId);
+                if (findNote != null)
+                {
+                    this.userContext.Notes.Remove(findNote);
+                    this.userContext.SaveChanges();
+                    return "Note is Deleted";
+                }
+
+                return "Note is not Found";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
