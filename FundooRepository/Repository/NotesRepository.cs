@@ -57,5 +57,27 @@ namespace FundooRepository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public string UpdateNote(NotesModel noteData)
+        {
+            try
+            {
+                var findNote = this.userContext.Notes.Find(noteData.NoteId);
+
+                if (findNote != null)
+                {
+                    findNote.Title = noteData.Title;
+                    findNote.Description = noteData.Description;
+                    this.userContext.SaveChanges();
+                    return "Note Updated";
+                }
+
+                return "Note Not Updated";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
