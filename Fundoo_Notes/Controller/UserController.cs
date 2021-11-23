@@ -18,11 +18,11 @@ namespace Fundoo_Notes.Controller
         }
         [HttpPost]
         [Route("api/register")]
-        public IActionResult Register([FromBody] RegisterModel userData)
+        public async Task<IActionResult> Register([FromBody] RegisterModel userData)
         {
             try
             {
-                string result = this.manager.Register(userData);
+                string result = await this.manager.Register(userData);
 
                 if (result.Equals("Registration Successfull"))
                 {
@@ -69,11 +69,11 @@ namespace Fundoo_Notes.Controller
 
         [HttpPut]
         [Route("api/resetpassword")]
-        public IActionResult ResetPassword([FromBody] ResetPasswordModel userData)
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel userData)
         {
             try
             {
-                string result = this.manager.ResetPassword(userData);
+                string result = await this.manager.ResetPassword(userData);
                 if (result.Equals("Password Updated"))
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = result });

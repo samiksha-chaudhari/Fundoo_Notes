@@ -42,7 +42,7 @@ namespace FundooRepository.Repository
         }
 
         public IConfiguration Configuration { get; }
-        public string Register(RegisterModel userData)
+        public async Task<string> Register(RegisterModel userData)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace FundooRepository.Repository
                         // Add the data to the database
                         this.userContext.Users.Add(userData);
                         // Save the change in database
-                        this.userContext.SaveChanges();
+                        await this.userContext.SaveChangesAsync();
                         return "Registration Successfull";
                     }
                     return "Registration UnSuccessfull";
@@ -94,7 +94,7 @@ namespace FundooRepository.Repository
 
         }
 
-        public string ResetPassword(ResetPasswordModel userData)
+        public async Task<string> ResetPassword(ResetPasswordModel userData)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace FundooRepository.Repository
                 {
                     validEmail.Password = EncryptPassword(userData.NewPassword);
                     this.userContext.Update(validEmail);
-                    this.userContext.SaveChanges();
+                    await this.userContext.SaveChangesAsync();
                     return "Password Updated";
                 }
 

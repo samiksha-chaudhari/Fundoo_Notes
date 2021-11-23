@@ -16,11 +16,11 @@ namespace FundooManager.Manager
             this.repository = repository;
         }
 
-        public string Register(RegisterModel userData)
+        public async Task<string> Register(RegisterModel userData)
         {
             try
             {
-                return this.repository.Register(userData);
+                return await this.repository.Register(userData);
             }
             catch (Exception e)
             {
@@ -40,11 +40,11 @@ namespace FundooManager.Manager
             }
         }
 
-        public string ResetPassword(ResetPasswordModel userData)
+        public async Task<string> ResetPassword(ResetPasswordModel userData)
         {
             try
             {
-                return this.repository.ResetPassword(userData);
+                return await this.repository.ResetPassword(userData);
             }
             catch (Exception ex)
             {
