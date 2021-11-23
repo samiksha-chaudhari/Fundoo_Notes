@@ -32,10 +32,12 @@ namespace Fundoo_Notes
         {
             services.AddMvc();
             services.AddDbContextPool<UserContext>(option => option.UseSqlServer(this.Configuration.GetConnectionString("FundooDB")));
+            //dependency injection
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<INotesManager, NotesManager>();
             services.AddTransient<INotesRepository, NotesRepository>();
+            //swagger services
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "Fundoo_Notes", Version = "1.0" });
