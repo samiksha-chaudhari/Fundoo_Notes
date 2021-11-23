@@ -124,7 +124,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public bool SetReminder(int noteID, string reminder)
+        public string SetReminder(int noteID, string reminder)
         {
             try
             {
@@ -133,10 +133,10 @@ namespace FundooRepository.Repository
                 {
                     findNote.Reminder = reminder;
                     this.userContext.SaveChanges();
-                    return true;
+                    return "Reminder Set";
                 }
 
-                return false;
+                return "noteID not Exist";
             }
             catch (Exception ex)
             {

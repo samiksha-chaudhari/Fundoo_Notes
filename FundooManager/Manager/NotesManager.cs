@@ -74,7 +74,7 @@ namespace FundooManager.Manager
             }
         }
 
-        public bool SetReminder(int noteID, string reminder)
+        public string SetReminder(int noteID, string reminder)
         {
             try
             {

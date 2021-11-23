@@ -125,5 +125,28 @@ namespace Fundoo_Notes.Controller
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        [HttpPut]
+        [Route("api/reminder")]
+        public IActionResult SetReminder(int noteID, string reminder)
+        {
+            try
+            {
+                string result = this.manager.SetReminder(noteID, reminder);
+                if (result.Equals("Reminder Set"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = result });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = result });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
     }
 }
