@@ -4,6 +4,7 @@ using FundooRepository.Interfac;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FundooRepository.Repository
@@ -23,14 +24,19 @@ namespace FundooRepository.Repository
         {
             try
             {
-                if (noteData.Title != null || noteData.Description != null)
+                var validUser = this.userContext.Users.Where(x => x.ID == noteData.ID).FirstOrDefault();
+                if (validUser != null)
                 {
-                    this.userContext.Notes.Add(noteData);
-                    this.userContext.SaveChanges();
-                    return "Add Successfull";
-                }
+                    if (noteData.Title != null || noteData.Description != null)
+                    {
+                        this.userContext.Notes.Add(noteData);
+                        this.userContext.SaveChanges();
+                        return "Add Successfull";
+                    }
 
-                return "Unsuccessfull";
+                    return "Unsuccessfull";
+                }
+                return "UserId not Present";
             }
             catch (Exception ex)
             {
@@ -42,7 +48,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var findNote = this.userContext.Notes.Find(noteId);
+                var findNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
                 if (findNote != null)
                 {
                     this.userContext.Notes.Remove(findNote);
@@ -62,7 +68,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var findNote = this.userContext.Notes.Find(noteData.NoteId);
+                var findNote = this.userContext.Notes.Where(x => x.NoteId == noteData.NoteId).FirstOrDefault();
 
                 if (findNote != null)
                 {
@@ -100,5 +106,7 @@ namespace FundooRepository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        
     }
 }
