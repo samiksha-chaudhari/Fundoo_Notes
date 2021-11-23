@@ -52,11 +52,11 @@ namespace FundooManager.Manager
             }
         }
 
-        public async Task<string> ForgotPassword(string email)
+        public string ForgotPassword(string email)
         {
             try
             {
-                return await this.repository.ForgotPassword(email);
+                return this.repository.ForgotPassword(email);
             }
             catch (Exception ex)
             {

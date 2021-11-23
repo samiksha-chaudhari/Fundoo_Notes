@@ -1,6 +1,7 @@
 using FundooManager.Interface;
 using FundooManager.Manager;
 using FundooRepository.Context;
+using FundooRepository.Interfac;
 using FundooRepository.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,8 @@ namespace Fundoo_Notes
             services.AddDbContextPool<UserContext>(option => option.UseSqlServer(this.Configuration.GetConnectionString("FundooDB")));
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<INotesManager, NotesManager>();
+            services.AddTransient<INotesRepository, NotesRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "Fundoo_Notes", Version = "1.0" });

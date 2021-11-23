@@ -92,11 +92,11 @@ namespace Fundoo_Notes.Controller
 
         [HttpPost]
         [Route("api/forgetpassword")]
-        public async Task<IActionResult> ForgotPassword(string email)
+        public IActionResult ForgotPassword(string email)
         {
             try
             {
-                string result = await this.manager.ForgotPassword(email);
+                string result =  this.manager.ForgotPassword(email);
                 if (result.Equals("Mail is send"))
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = result });

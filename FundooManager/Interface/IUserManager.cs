@@ -8,6 +8,6 @@ namespace FundooManager.Interface
         string Register(RegisterModel userData);
         string LogIn(LoginModel login);
         string ResetPassword(ResetPasswordModel userData);
-        Task<string> ForgotPassword(string email);
+        string ForgotPassword(string email);
     }
 }

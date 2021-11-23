@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fundoo_Notes", "Fundoo_Notes\Fundoo_Notes.csproj", "{1290EAEF-3E41-4DD9-9235-15DAB401A2D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fundoo_Notes", "Fundoo_Notes\Fundoo_Notes.csproj", "{1290EAEF-3E41-4DD9-9235-15DAB401A2D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundooManager", "FundooManager\FundooManager.csproj", "{41DB257D-CD78-4389-8319-C2514C43EA5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooManager", "FundooManager\FundooManager.csproj", "{41DB257D-CD78-4389-8319-C2514C43EA5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundooModel", "FundooModel\FundooModel.csproj", "{67226C90-5C6C-4636-AB7E-EE225CD513C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooModel", "FundooModel\FundooModel.csproj", "{67226C90-5C6C-4636-AB7E-EE225CD513C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundooRepository", "FundooRepository\FundooRepository.csproj", "{D1CD15AC-6879-46D6-B4F4-E6B6B297343F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooRepository", "FundooRepository\FundooRepository.csproj", "{D1CD15AC-6879-46D6-B4F4-E6B6B297343F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

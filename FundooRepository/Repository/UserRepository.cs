@@ -69,20 +69,23 @@ namespace FundooRepository.Repository
             }
         }
 
-        public string LogIn(LoginModel logIn)//here class is used as datatype and its parameter
+        public string LogIn(LoginModel logIn)
         {
             try
-            {
+            {               
                 var validEmail = this.userContext.Users.Where(x => x.Email == logIn.Email).FirstOrDefault();
-                var validPassword = this.userContext.Users.Where(x => x.Password == logIn.Password).FirstOrDefault();
-                if (validEmail == null && validPassword == null)
+                if (validEmail != null)
                 {
-                    return "Login UnSuccessfull";
+                    logIn.Password = EncryptPassword(logIn.Password);
+                    var validPassword = this.userContext.Users.Where(x => x.Password == logIn.Password).FirstOrDefault();
+                    if (validPassword == null)
+                    {
+                        return "Login Successfull";
+                    }
+
+                    return "Enter Correct Password ";
                 }
-                else
-                {
-                    return "Login Successfull ";
-                }
+                return "Email Incorrect";
             }
             catch (Exception ex)
             {
@@ -112,7 +115,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public async Task<string> ForgotPassword(string email)
+        public string ForgotPassword(string email)
         {
             try
             {
