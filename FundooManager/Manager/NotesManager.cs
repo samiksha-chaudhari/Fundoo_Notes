@@ -49,5 +49,17 @@ namespace FundooManager.Manager
                 throw new Exception(ex.Message);
             }
         }
+
+        public bool Pin(int noteId)
+        {
+            try
+            {
+                return this.repository.Pin(noteId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
