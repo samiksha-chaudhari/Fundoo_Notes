@@ -7,6 +7,7 @@ namespace FundooRepository.Interfac
         string AddNote(NotesModel noteData);
         string DeleteNote(int noteId);
         string UpdateNote(NotesModel noteData);
+        bool Pin(int noteId);
 
     }
 }

@@ -79,5 +79,26 @@ namespace FundooRepository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public bool Pin(int noteId)
+        {
+            try
+            {
+                var findNote = this.userContext.Notes.Find(noteId);
+                if (findNote != null)
+                {
+                    findNote.Pin = findNote.Pin;
+                    findNote.Archive = false;
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
