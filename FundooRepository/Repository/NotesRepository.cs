@@ -90,13 +90,10 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var findNote = this.userContext.Notes.Find(noteId);
+                var findNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
                 if (findNote != null)
                 {
-                    findNote.Pin = findNote.Pin;
-                    findNote.Archive = false;
-                    this.userContext.SaveChanges();
-                    return true;
+                   
                 }
 
                 return false;
@@ -107,6 +104,24 @@ namespace FundooRepository.Repository
             }
         }
 
-        
+        public string Colour(int noteId, string notecolor)
+        {
+            try
+            {
+                var checkNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (checkNote != null)
+                {
+                    checkNote.Colour = notecolor;
+                    this.userContext.SaveChanges();
+                    return "Colour Changed";
+                }
+
+                return "Colour not Changed ";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

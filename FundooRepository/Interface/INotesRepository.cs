@@ -8,6 +8,6 @@ namespace FundooRepository.Interfac
         string DeleteNote(int noteId);
         string UpdateNote(NotesModel noteData);
         bool Pin(int noteId);
-        string Color(int noteId, string noteColor);
+        string Colour(int noteId, string noteColor);
     }
 }
