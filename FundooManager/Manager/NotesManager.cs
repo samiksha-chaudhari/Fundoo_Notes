@@ -73,5 +73,17 @@ namespace FundooManager.Manager
                 throw new Exception(ex.Message);
             }
         }
+
+        public bool SetReminder(int noteID, string reminder)
+        {
+            try
+            {
+                return this.repository.SetReminder(noteID, reminder);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
