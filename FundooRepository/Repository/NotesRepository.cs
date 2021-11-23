@@ -124,6 +124,24 @@ namespace FundooRepository.Repository
             }
         }
 
-        
+        public bool SetReminder(int noteID, string reminder)
+        {
+            try
+            {
+                var findNote = this.userContext.Notes.Where(x => x.NoteId == noteID).FirstOrDefault();
+                if (findNote != null)
+                {
+                    findNote.Reminder = reminder;
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
