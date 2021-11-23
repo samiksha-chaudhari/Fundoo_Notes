@@ -108,10 +108,10 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
-                if (checkNote != null)
+                var findNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (findNote != null)
                 {
-                    checkNote.Colour = notecolor;
+                    findNote.Colour = notecolor;
                     this.userContext.SaveChanges();
                     return "Colour Changed";
                 }
@@ -123,5 +123,7 @@ namespace FundooRepository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        
     }
 }
