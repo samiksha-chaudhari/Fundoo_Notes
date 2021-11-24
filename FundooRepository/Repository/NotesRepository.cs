@@ -197,5 +197,36 @@ namespace FundooRepository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public bool Trash(int noteId)
+        {
+            try
+            {
+                var findNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (findNote != null)
+                {
+                    if (findNote.Trash == false)
+                    {
+                        findNote.Trash = true;
+                        findNote.Archive = false;
+                        findNote.Pin = false;
+                        findNote.Reminder = null;
+                        this.userContext.SaveChanges();
+                    }
+                    else
+                    {
+                        findNote.Trash = false;
+                        this.userContext.SaveChanges();
+                    }
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

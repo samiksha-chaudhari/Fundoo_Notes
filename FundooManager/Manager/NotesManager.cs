@@ -96,5 +96,17 @@ namespace FundooManager.Manager
                 throw new Exception(ex.Message);
             }
         }
+
+        public bool Trash(int noteId)
+        {
+            try
+            {
+                return this.repository.Trash(noteId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
