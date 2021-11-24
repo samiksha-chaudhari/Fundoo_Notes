@@ -48,7 +48,7 @@ namespace FundooManager.Manager
             {
                 throw new Exception(ex.Message);
             }
-        }
+        } 
 
         public bool Pin(int noteId)
         {

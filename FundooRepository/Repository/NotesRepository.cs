@@ -34,7 +34,7 @@ namespace FundooRepository.Repository
                         return "Add Successfull";
                     }
 
-                    return "Unsuccessfull";
+                    return "Unsuccessfull"; 
                 }
                 return "UserId not Present";
             }
@@ -98,9 +98,20 @@ namespace FundooRepository.Repository
                 var findNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
                 if (findNote != null)
                 {
-                    findNote.Pin = true;
-                    this.userContext.SaveChanges();
+                    if(findNote.Pin==false)
+                    {
+                        findNote.Pin = true;
+                        findNote.Archive = false;
+                        this.userContext.SaveChanges();
+                    }
+                    else
+                    {
+                        findNote.Pin = false;
+                        findNote.Archive = false;
+                        this.userContext.SaveChanges();
+                    }
                     return true;
+
                 }
                 else 
                 {

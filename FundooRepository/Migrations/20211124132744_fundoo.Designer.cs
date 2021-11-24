@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundooRepository.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20211122180601_notes")]
-    partial class notes
+    [Migration("20211124132744_fundoo")]
+    partial class fundoo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,9 @@ namespace FundooRepository.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -51,12 +54,9 @@ namespace FundooRepository.Migrations
                     b.Property<bool>("Trash")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("NoteId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ID");
 
                     b.ToTable("Notes");
                 });
@@ -93,7 +93,7 @@ namespace FundooRepository.Migrations
                 {
                     b.HasOne("FundooModel.RegisterModel", "RegisterModel")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
