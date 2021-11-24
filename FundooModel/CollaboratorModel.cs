@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FundooModel
 {
-    class CollaboratorModel
+    public class CollaboratorModel
     {
         [Key]
         public int CollaboratorId { get; set; }
