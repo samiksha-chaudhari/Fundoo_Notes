@@ -109,11 +109,11 @@ namespace FundooManager.Manager
             }
         }
 
-        public List<NotesModel> GetNote(int userId)
+        public List<NotesModel> GetNote(int Id)
         {
             try
             {
-                return this.repository.GetNote(userId);
+                return this.repository.GetNote(Id);
             }
             catch (Exception ex)
             {

@@ -193,12 +193,12 @@ namespace Fundoo_Notes.Controller
         }
 
         [HttpGet]
-        [Route("api/getNote")]
-        public IActionResult GetNote(int userId)
+        [Route("api/getnote")]
+        public IActionResult GetNote(int Id)
         {
             try
             {
-                var result = this.manager.GetNote(userId);
+                var result = this.manager.GetNote(Id);
                 if (result.Count > 0)
                 {
                     return this.Ok(new ResponseModel<List<NotesModel>>() { Status = true, Message = "Get All Notes", Data = result });

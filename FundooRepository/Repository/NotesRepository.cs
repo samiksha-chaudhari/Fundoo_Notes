@@ -20,7 +20,7 @@ namespace FundooRepository.Repository
             this.configuration = configuration;
         }
 
-        public string AddNote(NotesModel noteData)
+        public string AddNote(NotesModel noteData)//passing note data title,desciption etc
         {
             try
             {
@@ -44,7 +44,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public string DeleteNote(int noteId)
+        public string DeleteNote(int noteId)//passing note Id
         {
             try
             {
@@ -66,7 +66,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public string UpdateNote(NotesModel noteData)
+        public string UpdateNote(NotesModel noteData)//passing note data title,desciption etc
         {
             try
             {
@@ -91,7 +91,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public bool Pin(int noteId)
+        public bool Pin(int noteId)//passing note Id
         {
             try
             {
@@ -123,7 +123,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public string Colour(int noteId, string notecolor)
+        public string Colour(int noteId, string notecolor)//passing note Id and colour
         {
             try
             {
@@ -146,7 +146,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public string SetReminder(int noteID, string reminder)
+        public string SetReminder(int noteID, string reminder)//passing note Id and reminder string
         {
             try
             {
@@ -168,7 +168,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public bool Archive(int noteId)
+        public bool Archive(int noteId)//passing note Id
         {
             try
             {
@@ -198,7 +198,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public bool Trash(int noteId)
+        public bool Trash(int noteId)//passing note Id
         {
             try
             {
@@ -229,9 +229,9 @@ namespace FundooRepository.Repository
             }
         }
 
-        public List<NotesModel> GetNote(int userId)
+        public List<NotesModel> GetNote(int Id)//passing user ID 
         {
-           var notes = this.userContext.Notes.Where(x => x.ID == userId && x.Archive == false && x.Trash == false).ToList();
+           var notes = this.userContext.Notes.Where(x => x.ID == Id && x.Archive == false && x.Trash == false).ToList();
             try
             {
                 if (notes != null)

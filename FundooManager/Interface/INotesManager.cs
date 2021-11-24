@@ -13,6 +13,6 @@ namespace FundooManager.Interface
         string SetReminder(int noteID, string reminder);
         bool Archive(int noteId);
         bool Trash(int noteId);
-        List<NotesModel> GetNote(int userId);
+        List<NotesModel> GetNote(int Id);
     }
 }
