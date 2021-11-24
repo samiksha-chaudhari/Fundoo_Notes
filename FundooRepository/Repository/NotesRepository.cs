@@ -111,7 +111,6 @@ namespace FundooRepository.Repository
                         this.userContext.SaveChanges();
                     }
                     return true;
-
                 }
                 else 
                 {
@@ -162,6 +161,36 @@ namespace FundooRepository.Repository
                 {
                     return "noteID not Exist";
                 }                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool Archive(int noteId)
+        {
+            try
+            {
+                var findNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (findNote != null)
+                {
+                    if (findNote.Archive == false)
+                    {
+                        findNote.Archive = true;
+                        findNote.Pin = false;
+                        this.userContext.SaveChanges();
+                    }
+                    else
+                    {
+                        findNote.Archive = false;
+                        findNote.Pin = false;
+                        this.userContext.SaveChanges();
+                    }
+                    return true;
+                }
+
+                return false;
             }
             catch (Exception ex)
             {

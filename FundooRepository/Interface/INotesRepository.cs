@@ -10,5 +10,6 @@ namespace FundooRepository.Interfac
         bool Pin(int noteId);
         string Colour(int noteId, string noteColor);
         string SetReminder(int noteID, string reminder);
+        bool Archive(int noteId);
     }
 }

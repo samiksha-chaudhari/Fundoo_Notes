@@ -148,5 +148,26 @@ namespace Fundoo_Notes.Controller
             }
         }
 
+        [HttpPut]
+        [Route("api/archive")]
+        public IActionResult Archive(int noteId)
+        {
+            try
+            {
+                bool result = this.manager.Archive(noteId);
+                if (result)
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note Archive" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note not Found" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }
