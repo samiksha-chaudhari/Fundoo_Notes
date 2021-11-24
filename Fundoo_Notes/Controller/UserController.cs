@@ -53,7 +53,7 @@ namespace Fundoo_Notes.Controller
             {
                 string result = this.manager.LogIn(login);
 
-                if (result.Equals("Login Successfull "))
+                if (result.Equals("Login Successfull"))
                 {
                     ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
                     IDatabase database = connectionMultiplexer.GetDatabase();

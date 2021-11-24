@@ -39,6 +39,7 @@ namespace FundooRepository.Repository
         //    }
         //}
 
+
         public string EncryptPassword(string password)
         {
             var passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -130,14 +131,14 @@ namespace FundooRepository.Repository
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress(this.Configuration["Credentials: Email"]);
+                mail.From = new MailAddress(this.Configuration["Credentials:Email"]);
                 mail.To.Add(email);
                 mail.Subject = "To Test Out Mail";
                 SendMSMQ();
                 mail.Body = ReceiveMSMQ();
 
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential(this.Configuration["Credentials: Email"], this.Configuration["Credentials: Password"]);
+                SmtpServer.Credentials = new System.Net.NetworkCredential(this.Configuration["Credentials:Email"], this.Configuration["Credentials:Password"]);
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
                 return "Mail is send";
