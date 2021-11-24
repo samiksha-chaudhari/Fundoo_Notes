@@ -2,10 +2,14 @@
 using FundooModel;
 using FundooRepository.Context;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -80,6 +84,11 @@ namespace FundooRepository.Repository
                     var validPassword = this.userContext.Users.Where(x => x.Password == logIn.Password).FirstOrDefault();
                     if (validPassword == null)
                     {
+                        ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+                        IDatabase database = connectionMultiplexer.GetDatabase();
+                        database.StringSet(key: "First Name", validEmail.FirstName);
+                        database.StringSet(key: "Last Name", validEmail.LastName);
+
                         return "Login Successfull";
                     }
 
@@ -160,6 +169,21 @@ namespace FundooRepository.Repository
             MessageQueue messageQueue = new MessageQueue(@".\Private$\Fundoo");
             var receivemsg = messageQueue.Receive();
             return receivemsg.ToString();
+        }
+
+        public string GenerateToken(string email)
+        {
+            var key = Encoding.UTF8.GetBytes(this.Configuration["SecretKey"]);
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
+            SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            JwtSecurityToken token = handler.CreateJwtSecurityToken(descriptor);
+            return handler.WriteToken(token);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace FundooRepository.Repository
     {
         private readonly UserContext userContext;
 
-        private readonly IConfiguration configuration;
+        public readonly IConfiguration configuration;
         public NotesRepository(UserContext userContext, IConfiguration configuration)
         {
             this.userContext = userContext;
@@ -55,8 +55,10 @@ namespace FundooRepository.Repository
                     this.userContext.SaveChanges();
                     return "Note is Deleted";
                 }
-
-                return "Note is not Found";
+                else
+                {
+                    return "Note is not Found";
+                }                
             }
             catch (Exception ex)
             {
@@ -77,8 +79,11 @@ namespace FundooRepository.Repository
                     this.userContext.SaveChanges();
                     return "Note Updated";
                 }
-
-                return "Note Not Updated";
+                else 
+                {
+                    return "Note Not Updated";
+                }
+               
             }
             catch (Exception ex)
             {
@@ -93,10 +98,14 @@ namespace FundooRepository.Repository
                 var findNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
                 if (findNote != null)
                 {
-                   
+                    findNote.Pin = true;
+                    this.userContext.SaveChanges();
+                    return true;
                 }
-
-                return false;
+                else 
+                {
+                    return false;
+                }                
             }
             catch (Exception ex)
             {
@@ -115,8 +124,11 @@ namespace FundooRepository.Repository
                     this.userContext.SaveChanges();
                     return "Colour Changed";
                 }
-
-                return "Colour not Changed ";
+                else 
+                {
+                    return "Colour not Changed ";
+                }
+                
             }
             catch (Exception ex)
             {
@@ -135,8 +147,10 @@ namespace FundooRepository.Repository
                     this.userContext.SaveChanges();
                     return "Reminder Set";
                 }
-
-                return "noteID not Exist";
+                else 
+                {
+                    return "noteID not Exist";
+                }                
             }
             catch (Exception ex)
             {
