@@ -228,5 +228,23 @@ namespace FundooRepository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<NotesModel> GetNote(int userId)
+        {
+           var notes = this.userContext.Notes.Where(x => x.ID == userId && x.Archive == false && x.Trash == false).ToList();
+            try
+            {
+                if (notes != null)
+                {
+                    return notes;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

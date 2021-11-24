@@ -1,4 +1,5 @@
 ﻿using FundooModel;
+using System.Collections.Generic;
 
 namespace FundooManager.Interface
 {
@@ -12,5 +13,6 @@ namespace FundooManager.Interface
         string SetReminder(int noteID, string reminder);
         bool Archive(int noteId);
         bool Trash(int noteId);
+        List<NotesModel> GetNote(int userId);
     }
 }

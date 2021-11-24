@@ -191,5 +191,27 @@ namespace Fundoo_Notes.Controller
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("api/getNote")]
+        public IActionResult GetNote(int userId)
+        {
+            try
+            {
+                var result = this.manager.GetNote(userId);
+                if (result.Count > 0)
+                {
+                    return this.Ok(new ResponseModel<List<NotesModel>>() { Status = true, Message = "Get All Notes", Data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note not Found" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }
