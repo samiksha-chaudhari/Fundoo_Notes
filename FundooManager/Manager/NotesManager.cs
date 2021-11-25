@@ -109,7 +109,7 @@ namespace FundooManager.Manager
             }
         }
 
-        public List<NotesModel> GetNote(int Id)
+        public List<string> GetNote(int Id)
         {
             try
             {

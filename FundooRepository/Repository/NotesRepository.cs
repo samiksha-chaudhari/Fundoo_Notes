@@ -27,9 +27,9 @@ namespace FundooRepository.Repository
                 var validUser = this.userContext.Users.Where(x => x.ID == noteData.ID).FirstOrDefault();
                 if (validUser != null)
                 {
-                    if (noteData.Title != null || noteData.Description != null)
+                    if (noteData != null)
                     {
-                        this.userContext.Notes.Add(noteData);
+                        this.userContext.Add(noteData);
                         this.userContext.SaveChanges();
                         return "Add Successfull";
                     }
@@ -51,14 +51,18 @@ namespace FundooRepository.Repository
                 var findNote = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
                 if (findNote != null)
                 {
-                    this.userContext.Notes.Remove(findNote);
-                    this.userContext.SaveChanges();
-                    return "Note is Deleted";
+                    if (findNote.Trash != true)
+                    {
+                        this.userContext.Notes.Remove(findNote);
+                        this.userContext.SaveChanges();
+                        return "Note is Deleted";
+                    }
+                    else
+                    {
+                        return "Note is not Found";
+                    }
                 }
-                else
-                {
-                    return "Note is not Found";
-                }                
+                return null;
             }
             catch (Exception ex)
             {
@@ -229,17 +233,44 @@ namespace FundooRepository.Repository
             }
         }
 
-        public List<NotesModel> GetNote(int Id)//passing user ID 
+        //public List<NotesModel> GetNote(int Id)//passing user ID 
+        //{
+        //    var notes = this.userContext.Notes.Where(x => x.ID == Id).ToList();
+        //    try
+        //    {
+        //        if (notes != null)
+        //        {
+        //            return notes;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }               
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        public List<string> GetNote(int Id)
         {
-           var notes = this.userContext.Notes.Where(x => x.ID == Id && x.Archive == false && x.Trash == false).ToList();
             try
             {
-                if (notes != null)
+                List<string> notesList = new List<string>();
+                if (Id != 0)
                 {
-                    return notes;
+                    IEnumerable<NotesModel> notes = from x in this.userContext.Notes where x.ID == Id select x;
+                    foreach (var note in notes)
+                    {
+                         string result = "NoteID = " + note.NoteId + " " + "Title = " + note.Title + " " + "Description = " + note.Description + " " + "Reminder = " + note.Reminder + " " + "Colour = "+ note.Colour + " " + "Pin = " + note.Pin + " " + "Archive = " + note.Archive + " " + "Trash = " + note.Trash;
+                        notesList.Add(result);
+                    }
+                    return notesList;
                 }
-
-                return null;
+                else
+                {
+                    return null;
+                } 
             }
             catch (Exception ex)
             {

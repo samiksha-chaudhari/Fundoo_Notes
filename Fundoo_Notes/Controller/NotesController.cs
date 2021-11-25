@@ -1,5 +1,6 @@
 ﻿using FundooManager.Interface;
 using FundooModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Fundoo_Notes.Controller
 {
+   // [Authorize]
     public class NotesController : ControllerBase
     {
         private readonly INotesManager manager;
@@ -201,7 +203,7 @@ namespace Fundoo_Notes.Controller
                 var result = this.manager.GetNote(Id);
                 if (result.Count > 0)
                 {
-                    return this.Ok(new ResponseModel<List<NotesModel>>() { Status = true, Message = "Get All Notes", Data = result });
+                    return this.Ok(new ResponseModel<List<string>>() { Status = true, Message = "Get All Notes", Data = result });
                 }
                 else
                 {

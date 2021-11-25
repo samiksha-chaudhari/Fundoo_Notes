@@ -24,27 +24,27 @@ namespace FundooRepository.Repository
             this.userContext = userContext;
         }
 
-        //public string EncryptPassword(string password)
-        //{
-        //    try
-        //    {
-        //        byte[] EncryptPaas = new byte[password.Length];
-        //        EncryptPaas = System.Text.Encoding.UTF8.GetBytes(password);
-        //        string EncodedData = Convert.ToBase64String(EncryptPaas);
-        //        return EncodedData;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
-
-
         public string EncryptPassword(string password)
         {
-            var passwordBytes = Encoding.UTF8.GetBytes(password);
-            return Convert.ToBase64String(passwordBytes);
+            try
+            {
+                byte[] EncryptPaas = new byte[password.Length];
+                EncryptPaas = System.Text.Encoding.UTF8.GetBytes(password);
+                string EncodedData = Convert.ToBase64String(EncryptPaas);
+                return EncodedData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
+
+
+        //public string EncryptPassword(string password)
+        //{
+        //    var passwordBytes = Encoding.UTF8.GetBytes(password);
+        //    return Convert.ToBase64String(passwordBytes);
+        //}
 
         public IConfiguration Configuration { get; }
         public async Task<string> Register(RegisterModel userData)
@@ -89,7 +89,6 @@ namespace FundooRepository.Repository
                         IDatabase database = connectionMultiplexer.GetDatabase();
                         database.StringSet(key: "First Name", validEmail.FirstName);
                         database.StringSet(key: "Last Name", validEmail.LastName);
-
                         return "Login Successfull";
                     }
 
