@@ -10,6 +10,7 @@ namespace FundooModel
     {
         [Key]
         public int CollaboratorId { get; set; }
+        public string CollaboratorEmail { get; set; }
                 
         [ForeignKey("NotesModel")]
         public int NoteId { get; set; }         

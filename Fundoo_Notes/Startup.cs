@@ -40,6 +40,8 @@ namespace Fundoo_Notes
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<INotesManager, NotesManager>();
             services.AddTransient<INotesRepository, NotesRepository>();
+            services.AddTransient<ICollaboratorManager, CollaboratorManager>();
+            services.AddTransient<ICollaboratorRepository, CollaboratorRepository>();
             //swagger services
             services.AddSwaggerGen(c =>
             {
