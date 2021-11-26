@@ -1,4 +1,5 @@
 ﻿using FundooModel;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
 namespace FundooManager.Interface
@@ -16,5 +17,6 @@ namespace FundooManager.Interface
         //List<string> GetNote(int Id);
         IEnumerable<NotesModel> GetNote(int Id);
         IEnumerable<NotesModel> GetArchive(int Id);
+        string AddImage(int noteId, IFormFile path);
     }
 }
