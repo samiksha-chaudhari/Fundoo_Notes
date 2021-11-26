@@ -1,9 +1,9 @@
 ﻿using FundooModel;
 using System.Collections.Generic;
 
-namespace FundooRepository.Interfac
+namespace FundooManager.Interface
 {
-    public interface ILabelRepository
+    public interface ILabelManager
     {
         string AddLabel(LabelModel labelData);
         string DeleteLabel(int labelId);

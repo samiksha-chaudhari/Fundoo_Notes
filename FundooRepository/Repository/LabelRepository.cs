@@ -4,11 +4,12 @@ using FundooRepository.Interfac;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FundooRepository.Repository
 {
-    class LabelRepository : ILabelRepository
+    public class LabelRepository : ILabelRepository
     {
         private readonly UserContext userContext;
 
@@ -27,12 +28,71 @@ namespace FundooRepository.Repository
                 {
                     this.userContext.Add(labelData);
                     this.userContext.SaveChanges();
-                    return "Add Successfull";
+                    return "Label Add Successfull";
                 }
                 else
                 {
                     return "Unsuccessfull";
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string DeleteLabel(int labelId)//passing note Id
+        {
+            try
+            {
+                var findNote = this.userContext.label.Where(x => x.LabelId == labelId).FirstOrDefault();
+                if (findNote != null)
+                {
+                    if (findNote != null)
+                    {
+                        this.userContext.label.Remove(findNote);
+                        this.userContext.SaveChanges();
+                        return "Label is Deleted";
+                    }
+                    else
+                    {
+                        return "Label is not Found";
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public IEnumerable<LabelModel> GetLabel(int noteId)//give total labels for noteId
+        {
+            try
+            {
+                IEnumerable<LabelModel> labels = this.userContext.label.Where(x => x.NoteId == noteId).ToList();
+                if (labels != null)
+                {
+                    return labels;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public IEnumerable<LabelModel> GetLabelUser(int userId)//give total labels for userId
+        {
+            try
+            {
+                IEnumerable<LabelModel> labels = this.userContext.label.Where(x => x.ID == userId).ToList();
+                if (labels != null)
+                {
+                    return labels;
+                }
+                return null;
             }
             catch (Exception ex)
             {
