@@ -1,6 +1,7 @@
 ﻿using Experimental.System.Messaging;
 using FundooModel;
 using FundooRepository.Context;
+using FundooRepository.Interfac;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
@@ -18,6 +19,7 @@ namespace FundooRepository.Repository
     public class UserRepository : IUserRepository
     {
         private readonly UserContext userContext;
+        //private readonly HttpContext context;
         public UserRepository(IConfiguration configuration, UserContext userContext)
         {
             this.Configuration = configuration;

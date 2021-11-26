@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
-namespace FundooRepository.Repository
+namespace FundooRepository.Interfac
 {
     public interface IUserRepository
     {

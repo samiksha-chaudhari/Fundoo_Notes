@@ -68,7 +68,7 @@ namespace Fundoo_Notes.Controller
                         Email=login.Email
                     };
                     string tokenString = this.manager.GenerateToken(login.Email);
-                    return this.Ok(new { Status = true, Message = result, Token = tokenString });
+                    return this.Ok(new { Status = true, Message = result, Data = data, Token = tokenString }) ;
                 }
                 else
                 {

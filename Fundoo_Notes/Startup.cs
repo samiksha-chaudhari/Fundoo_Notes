@@ -38,10 +38,19 @@ namespace Fundoo_Notes
             //dependency injection
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
-            services.AddTransient<INotesManager, NotesManager>();
             services.AddTransient<INotesRepository, NotesRepository>();
-            services.AddTransient<ICollaboratorManager, CollaboratorManager>();
+            services.AddTransient<INotesManager, NotesManager>();            
             services.AddTransient<ICollaboratorRepository, CollaboratorRepository>();
+            services.AddTransient<ICollaboratorManager, CollaboratorManager>();
+           
+            services.AddSession();
+            services.AddCors(options => options.AddPolicy("AllowAllHeaders", builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
+
             //swagger services
             services.AddSwaggerGen(c =>
             {
@@ -105,6 +114,7 @@ namespace Fundoo_Notes
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCors("AllowAllHeaders");
            
             app.UseHttpsRedirection();
             app.UseStaticFiles();

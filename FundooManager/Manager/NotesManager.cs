@@ -109,11 +109,23 @@ namespace FundooManager.Manager
             }
         }
 
-        public List<string> GetNote(int Id)
+        public IEnumerable<NotesModel> GetNote(int Id)
         {
             try
             {
                 return this.repository.GetNote(Id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public IEnumerable<NotesModel> GetArchive(int Id)
+        {
+            try
+            {
+                return this.repository.GetArchive(Id);
             }
             catch (Exception ex)
             {

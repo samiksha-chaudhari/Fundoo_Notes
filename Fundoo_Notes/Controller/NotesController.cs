@@ -201,9 +201,31 @@ namespace Fundoo_Notes.Controller
             try
             {
                 var result = this.manager.GetNote(Id);
-                if (result.Count > 0)
+                if (result!=null)
                 {
-                    return this.Ok(new ResponseModel<List<string>>() { Status = true, Message = "Get All Notes", Data = result });
+                    return this.Ok(new ResponseModel<IEnumerable<NotesModel>>() { Status = true, Message = "Get All Notes", Data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note not Found" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("api/getarchive")]
+        public IActionResult GetArchive(int Id)
+        {
+            try
+            {
+                var result = this.manager.GetArchive(Id);
+                if (result != null)
+                {
+                    return this.Ok(new ResponseModel<IEnumerable<NotesModel>>() { Status = true, Message = "Get All Archive Notes", Data = result });
                 }
                 else
                 {
