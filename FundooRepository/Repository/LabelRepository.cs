@@ -45,12 +45,38 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var findNote = this.userContext.label.Where(x => x.LabelId == labelId).FirstOrDefault();
-                if (findNote != null)
+                var findLabel = this.userContext.label.Where(x => x.LabelId == labelId).FirstOrDefault();
+                if (findLabel != null)
                 {
-                    if (findNote != null)
+                    if (findLabel != null)
                     {
-                        this.userContext.label.Remove(findNote);
+                        this.userContext.label.Remove(findLabel);
+                        this.userContext.SaveChanges();
+                        return "Label is Deleted";
+                    }
+                    else
+                    {
+                        return "Label is not Found";
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string DeleteLabelUID(int userId)//passing User Id
+        {
+            try
+            {
+                var findLabel = this.userContext.label.Where(x => x.ID == userId).FirstOrDefault();
+                if (findLabel != null)
+                {
+                    if (findLabel != null)
+                    {
+                        this.userContext.label.Remove(findLabel);
                         this.userContext.SaveChanges();
                         return "Label is Deleted";
                     }
@@ -94,6 +120,27 @@ namespace FundooRepository.Repository
                 }
                 return null;
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public string EditLabel(LabelModel labelData)
+        {
+            try
+            {
+                var findLabel = this.userContext.label.Find(labelData.LabelId);
+                if (findLabel != null)
+                {
+                    findLabel.ID = labelData.ID;
+                    findLabel.Label = labelData.Label;
+                    this.userContext.SaveChanges();
+                    return "Label Updated";
+                }
+
+                return "Not Found";
+            }
+
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

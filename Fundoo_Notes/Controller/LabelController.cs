@@ -61,6 +61,28 @@ namespace Fundoo_Notes.Controller
             }
         }
 
+        [HttpDelete]
+        [Route("api/deletelabelUID")]
+        public IActionResult DeleteLabelUID(int userId)
+        {
+            try
+            {
+                string result = this.manager.DeleteLabelUID(userId);
+                if (result.Equals("Label is Deleted"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = result });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = result });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
         [HttpGet]
         [Route("api/getlabel")]
         public IActionResult GetLabel(int noteId)
@@ -97,6 +119,27 @@ namespace Fundoo_Notes.Controller
                 else
                 {
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note not Found" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+        [HttpPut]
+        [Route("api/updatelabel")]
+        public IActionResult EditLabel(LabelModel labelData)
+        {
+            try
+            {
+                string result = this.manager.EditLabel(labelData);
+                if (result.Equals("Label Updated"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = result });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = result });
                 }
             }
             catch (Exception ex)

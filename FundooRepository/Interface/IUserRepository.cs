@@ -6,8 +6,6 @@ namespace FundooRepository.Interfac
 {
     public interface IUserRepository
     {
-        IConfiguration Configuration { get; }
-
         Task<string> Register(RegisterModel userData);
         string LogIn(LoginModel login);
         Task<string> ResetPassword(ResetPasswordModel userData);

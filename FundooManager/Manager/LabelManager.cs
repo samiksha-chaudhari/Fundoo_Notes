@@ -37,6 +37,17 @@ namespace FundooManager.Manager
                 throw new Exception(ex.Message);
             }
         }
+        public string DeleteLabelUID(int userId)
+        {
+            try
+            {
+                return this.repository.DeleteLabelUID(userId);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public IEnumerable<LabelModel> GetLabel(int noteId)
         {
             try
@@ -57,6 +68,18 @@ namespace FundooManager.Manager
                 return this.repository.GetLabelUser(userId);
             }
             catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        
+        public string EditLabel(LabelModel labelData)
+        {
+            try
+            {
+                return this.repository.EditLabel(labelData);
+            }
+            catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
