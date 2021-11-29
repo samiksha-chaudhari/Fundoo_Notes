@@ -41,7 +41,7 @@ namespace FundooRepository.Repository
             }
         }
 
-        public string DeleteLabel(int labelId)//passing note Id
+        public string DeleteLabel(int labelId)//passing label Id
         {
             try
             {
